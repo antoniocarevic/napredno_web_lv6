@@ -1,0 +1,28 @@
+<head>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+
+<h1>Projekti</h1>
+
+<nav>
+  <a href="/projects/new">➕ Novi projekt</a>
+</nav>
+
+<% if (projects.length === 0) { %>
+  <div class="project-card">
+    <p><strong>Trenutno nemate projekata.</strong></p>
+  </div>
+<% } else { %>
+  <% projects.forEach(p => { %>
+    <div class="project-card">
+      <h2><%= p.name %><a href="/projects/<%= p._id %>"> - PRIKAŽI </a></h2>
+      <small><a href="/projects/<%= p._id %>/edit">✏️ Uredi</a></small>
+
+      <div class="project-actions">
+        <form action="/projects/<%= p._id %>?_method=DELETE" method="POST">
+          <button>Obriši</button>
+        </form>
+      </div>
+    </div>
+  <% }); %>
+<% } %>

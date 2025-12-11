@@ -1,0 +1,39 @@
+<head>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+  
+
+<hr>
+<nav>
+    <a href="/projects/new">➕ Novi projekt</a>
+    <a href="/projects"> Svi projekti</a>
+  </nav>
+
+
+
+<h1><%= project.name %></h1>
+<p><%= project.description %></p>
+<p>Cijena: <%= project.price %> €</p>
+<p>Poslovi: <%= project.tasks %></p>
+<p>Od <%= project.startDate.toDateString() %> do <%= project.endDate.toDateString() %></p>
+
+<h3>Članovi tima</h3>
+<% if (project.teamMembers.length > 0) { %>
+  <ul class="team-list">
+    <% project.teamMembers.forEach(m => { %>
+      <li><strong><%= m.name %></strong> – <%= m.role %></li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>Nema članova tima.</p>
+<% } %>
+
+<h4>Dodaj člana tima</h4>
+<form action="/projects/<%= project._id %>/team" method="POST">
+  <label>Ime člana</label>
+  <input name="name" required>
+  <label>Uloga</label>
+  <input name="role" required>
+  <button type="submit">Dodaj člana</button>
+</form>
+

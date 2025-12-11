@@ -1,0 +1,32 @@
+<head>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+
+<h1>Uredi projekt</h1>
+<form action="/projects/<%= project._id %>?_method=PUT" method="POST">
+  <label>Naziv projekta</label>
+  <input name="name" value="<%= project.name %>" placeholder="Naziv"><br>
+  <label>Opis</label>
+  <textarea name="description" placeholder="Opis"><%= project.description %></textarea><br>
+  <label>Cijena (EUR)</label>
+  <input name="price" type="number" value="<%= project.price %>" placeholder="Cijena"><br>
+  <label>Obavljeni poslovi</label>
+  <input name="tasks" value="<%= project.tasks %>" placeholder="Poslovi"><br>
+  <label>Datum početka</label>
+  <input name="startDate" type="date" value="<%= project.startDate.toISOString().split('T')[0] %>"><br>
+  <label>Datum završetka</label>
+  <input name="endDate" type="date" value="<%= project.endDate.toISOString().split('T')[0] %>"><br>
+  <button type="submit">Spremi promjene</button>
+</form>
+
+<a href="/projects">← Natrag na sve projekte</a>
+
+<script>
+const start = document.getElementById('startDate');
+const end = document.getElementById('endDate');
+
+start.addEventListener('change', () => {
+  end.min = start.value;
+});
+</script>
